@@ -1,0 +1,11 @@
+.list {
+  border: blue;
+  margin-top: 10px;
+}
+td {
+  text-align: center;
+  cursor: pointer;
+}
+th {
+  color: red;
+}

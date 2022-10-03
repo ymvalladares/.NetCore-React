@@ -1,0 +1,19 @@
+*src
++---*actions
+|    |--api.js (handle all htp request)
+|    |--dCandidate.js (Redux actions & action creators)
+|    |--store.js (configure redux store)
+|
++---*components
+|    |
+|    |--DCandidateS.js (list of record)
+|    |--DCandidatesForm.js (operation form)
+|   
++---*reducers
+|    |
+|    |--dCandidate.js
+|    |--index.js
+|   
+|-- App.js
+|-- index.js
+|-- index.css
