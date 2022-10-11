@@ -6,7 +6,11 @@ import imagen from "../../assets/logo.svg";
 
 const Navigation = () => {
   return (
-    <Navbar>
+    <Navbar
+      style={{
+        backgroundColor: "#ECECEC",
+      }}
+    >
       <Navbar.Brand className="text-dark fw-bold">
         <img
           alt=""

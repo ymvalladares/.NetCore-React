@@ -56,7 +56,7 @@ namespace Api.Controllers
         [HttpPut("update")]
         public async Task<ActionResult> UpdateNote(User user)
         {
-            var query = await userRepository.GetUserByIdAsync(user.Id);
+            var query = await userRepository.GetUserByIdAsync(user.Id); 
             if (query != null)
             {
                 query.AmountDonate += user.AmountDonate;

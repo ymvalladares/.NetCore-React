@@ -12,9 +12,7 @@ const Input = () => {
     console.log(event);
     setHandlerInput(event.target.value);
   };
-  const handlerUser = (email) => {
-    ctx.searchUser(email);
-  };
+
   return (
     <>
       <Form.Group className=" offset-4 col-4 mb-3 mt-3">
@@ -29,7 +27,7 @@ const Input = () => {
           <Button
             variant="outline-success"
             id="button-addon2"
-            onClick={() => handlerUser(handlerInput)}
+            onClick={() => ctx.searchUserInput(handlerInput)}
           >
             Search
           </Button>

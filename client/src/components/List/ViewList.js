@@ -9,6 +9,7 @@ import Input from "../Input/Input";
 import { DeleteUser } from "../../actions/service";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Help from "../Check/Help";
 
 const url = "https://localhost:44376/user/user/delete/";
 
@@ -45,54 +46,65 @@ const ViewList = () => {
   let i = 1;
   return (
     <>
-      <Input />
-      {ctx.users.length > 0 ? (
-        <div className="container">
-          <div className="mt-2">
-            <Table striped bordered hover size="sm" variant="dark">
-              <thead>
-                <tr className="text-center">
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Age</th>
-                  <th>AmountDonate</th>
-                  <th>Update</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              {ctx.users.map((obj, key) => (
-                <tbody key={key}>
-                  <tr>
-                    <td>{i++}</td>
-                    <td>{obj.name}</td>
-                    <td>{obj.lastName}</td>
-                    <td>{obj.email}</td>
-                    <td>{obj.age}</td>
-                    <td>{obj.amountDonate}</td>
-                    <td>
-                      <Modal type="Update" message="Amount Donate" user={obj} />
-                    </td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        onClick={() => handlerDelete(obj.id)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
-            </Table>
+      <div className="">
+        <div className="row">
+          <div className="col-2 fondo">
+            <Help />
+          </div>
+          <div className=" col-10">
+            <Input />
+            {ctx.users.length > 0 ? (
+              <div className="">
+                <Table striped bordered hover size="sm">
+                  <thead>
+                    <tr className="text-center">
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Age</th>
+                      <th>AmountDonate</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  {ctx.users.map((obj, key) => (
+                    <tbody key={key}>
+                      <tr>
+                        <td>{i++}</td>
+                        <td>{obj.name}</td>
+                        <td>{obj.lastName}</td>
+                        <td>{obj.email}</td>
+                        <td>{obj.age}</td>
+                        <td>{obj.amountDonate}</td>
+                        <td>
+                          <Modal
+                            type="Update"
+                            message="Amount Donate"
+                            user={obj}
+                          />
+                        </td>
+                        <td>
+                          <Button
+                            variant="danger"
+                            onClick={() => handlerDelete(obj.id)}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+                </Table>
+              </div>
+            ) : (
+              //
+              <MessageAlert variant="danger" message="Not users found" />
+            )}
+            <ToastContainer />
           </div>
         </div>
-      ) : (
-        //
-        <MessageAlert variant="danger" message="Not users found" />
-      )}
-      <ToastContainer />
+      </div>
     </>
   );
 };

@@ -14,3 +14,9 @@
   height: 100vh;
   background-size: cover;
 } */
+.error {
+  color: #e92b2d;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: center;
+}

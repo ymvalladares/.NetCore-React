@@ -12,7 +12,7 @@ const MessageAlert = (props) => {
             variant="outline-danger"
             name="Go Back"
             className="col text-center"
-            href="/"
+            href="/shop"
           />
         </Alert>
       </div>

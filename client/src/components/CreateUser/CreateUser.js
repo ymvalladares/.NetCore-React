@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -15,9 +15,9 @@ import { create } from "../../actions/service";
 const url = "https://localhost:44376/user/user/add";
 
 const schema = Yup.object().shape({
-  name: Yup.string().required(),
+  name: Yup.string().required().min(5).max(25),
   lastName: Yup.string().required(),
-  email: Yup.string().required(),
+  email: Yup.string().required().email("Invalid email address format").max(255),
   age: Yup.number().required().min(18).max(90),
   amountDonate: Yup.number().required(),
   terms: Yup.bool().required().oneOf([true], "Terms must be accepted"),
@@ -101,20 +101,26 @@ const CreateUser = () => {
                     controlId="validationFormik01"
                     className="offset-3 col-6"
                   >
-                    <Form.Label>First name</Form.Label>
+                    <Form.Label>Name</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Name"
+                      placeholder="First Name"
                       name="name"
                       value={values.name}
                       onChange={handleChange}
                       isInvalid={errors.name}
-                      isValid={!errors.name && touched.name}
+                      isValid={!isValid}
                       onBlur={handleBlur}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.name}
-                    </Form.Control.Feedback>
+
+                    {touched.name && errors.name && (
+                      <Form.Control.Feedback
+                        className={classes.error}
+                        type="invalid"
+                      >
+                        {errors.name}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                   <Form.Group
                     className="offset-3 col-6"
@@ -128,17 +134,21 @@ const CreateUser = () => {
                       name="lastName"
                       value={values.lastName}
                       onChange={handleChange}
-                      isInvalid={!!errors.lastName}
-                      isValid={!errors.lastName && touched.lastName}
+                      isInvalid={errors.lastName}
+                      isValid={!isValid}
                       onBlur={handleBlur}
                     />
 
-                    <Form.Control.Feedback type="invalid">
-                      {errors.lastName}
-                    </Form.Control.Feedback>
+                    {touched.lastName && errors.lastName && (
+                      <Form.Control.Feedback
+                        className={classes.error}
+                        type="invalid"
+                      >
+                        {errors.lastName}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
-                </Row>
-                <Row className="mb-3">
+
                   <Form.Group
                     className="offset-3 col-6"
                     mb="6"
@@ -152,12 +162,18 @@ const CreateUser = () => {
                       value={values.email}
                       onChange={handleChange}
                       isInvalid={!!errors.email}
-                      isValid={!errors.email && touched.email}
+                      isValid={!isValid}
+                      onBlur={handleBlur}
                     />
 
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
+                    {touched.email && errors.email && (
+                      <Form.Control.Feedback
+                        className={classes.error}
+                        type="invalid"
+                      >
+                        {errors.email}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                   <Form.Group
                     className="offset-3 col-6"
@@ -172,11 +188,17 @@ const CreateUser = () => {
                       value={values.age}
                       onChange={handleChange}
                       isInvalid={!!errors.age}
-                      isValid={!errors.age && touched.age}
+                      isValid={!isValid}
+                      onBlur={handleBlur}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.age}
-                    </Form.Control.Feedback>
+                    {touched.age && errors.age && (
+                      <Form.Control.Feedback
+                        className={classes.error}
+                        type="invalid"
+                      >
+                        {errors.age}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                   <Form.Group
                     className="offset-3 col-6"
@@ -191,12 +213,18 @@ const CreateUser = () => {
                       value={values.amountDonate}
                       onChange={handleChange}
                       isInvalid={!!errors.amountDonate}
-                      isValid={!errors.amountDonate && touched.amountDonate}
+                      isValid={!isValid}
+                      onBlur={handleBlur}
                     />
 
-                    <Form.Control.Feedback type="invalid">
-                      {errors.amountDonate}
-                    </Form.Control.Feedback>
+                    {touched.amountDonate && errors.amountDonate && (
+                      <Form.Control.Feedback
+                        className={classes.error}
+                        type="invalid"
+                      >
+                        {errors.amountDonate}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Row>
                 <Form.Group className="mb-3 offset-3 col-6">
@@ -206,16 +234,9 @@ const CreateUser = () => {
                     label="Agree to terms and conditions"
                     onChange={handleChange}
                     isInvalid={errors.terms}
-                    feedback={errors.terms}
-                    feedbackType="invalid"
-                    isValid={!errors.terms && touched.terms}
                   />
                 </Form.Group>
-                <Button
-                  disabled={isSubmitting}
-                  className="offset-5"
-                  type="submit"
-                >
+                <Button className="offset-5" type="submit">
                   Submit form
                 </Button>
               </Form>
